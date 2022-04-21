@@ -20846,37 +20846,37 @@ body {
   content: normal;
 }
 
-.topics-show-page .card {
+.fore-topics-topics-show-page .card {
   padding: 15px;
 }
-.topics-show-page .card h1, .topics-show-page .card .h1 {
+.fore-topics-topics-show-page .card h1, .fore-topics-topics-show-page .card .h1 {
   margin: 0.4em auto 0.6em;
   font-size: 28px;
   line-height: 38px;
 }
 
 /* Topic Index Page */
-.topics-index-page .topic-list .nav > li > a, .topicCategories-show-page .topic-list .nav > li > a, .root-page .topic-list .nav > li > a {
+.fore-topics-topics-index-page .topic-list .nav > li > a, .fore-topics-topicCategories-show-page .topic-list .nav > li > a {
   position: relative;
   display: block;
   padding: 5px 14px;
   font-size: 0.9em;
 }
-.topics-index-page .topic-list a, .topicCategories-show-page .topic-list a, .root-page .topic-list a {
+.fore-topics-topics-index-page .topic-list a, .fore-topics-topicCategories-show-page .topic-list a {
   color: #444444;
   text-decoration: none;
 }
-.topics-index-page .topic-list .meta, .topicCategories-show-page .topic-list .meta, .root-page .topic-list .meta {
+.fore-topics-topics-index-page .topic-list .meta, .fore-topics-topicCategories-show-page .topic-list .meta {
   font-size: 0.9em;
   color: #b3b3b3;
 }
-.topics-index-page .topic-list .meta a, .topicCategories-show-page .topic-list .meta a, .root-page .topic-list .meta a {
+.fore-topics-topics-index-page .topic-list .meta a, .fore-topics-topicCategories-show-page .topic-list .meta a {
   color: #b3b3b3;
 }
-.topics-index-page .topic-list .badge, .topicCategories-show-page .topic-list .badge, .root-page .topic-list .badge {
+.fore-topics-topics-index-page .topic-list .badge, .fore-topics-topicCategories-show-page .topic-list .badge {
   background-color: #d8d8d8 !important;
 }
-.topics-index-page .topic-list hr, .topicCategories-show-page .topic-list hr, .root-page .topic-list hr {
+.fore-topics-topics-index-page .topic-list hr, .fore-topics-topicCategories-show-page .topic-list hr {
   margin-top: 12px;
   margin-bottom: 12px;
   border: 0;

@@ -19,52 +19,67 @@ back：代表后台。
 client: 代表客户端。
  */
 
-Route::get('/', 'TopicsController@index')->name('root');
+ // 后台路由
+ Route::prefix('back')->group(function(){
+    Route::namespace('Back\Users')->name('back.users.')->group(function() {
+        Route::resource('users', 'UsersController', ['only' => ['index', 'store', 'destroy', 'create', 'edit', 'update']]);
+    });
+ });
 
-// 用户身份验证相关路由
-Route::get('login', 'SessionsController@create')->name('login');
-Route::post('login', 'SessionsController@store')->name('login');
-Route::delete('logout', 'SessionsController@destroy')->name('logout');
+ // 前台路由
+ Route::prefix('fore')->group(function() {
+     // 用户身份验证相关路由
+    Route::namespace('Fore\Sessions')->name('fore.sessions.')->group(function() {
+        Route::get('login', 'SessionsController@create')->name('sessions.create');
+        Route::post('login', 'SessionsController@store')->name('sessions.store');
+        Route::delete('logout', 'SessionsController@destroy')->name('sessions.destroy');
+    });
 
-// 个人页面
-Route::resource('users', 'UsersController', ['only' => ['show', 'index', 'store', 'destroy', 'create']]);
+    // 前台用户相关
+    Route::namespace('Fore\Users')->name('fore.users.')->group(function() {
+        Route::resource('users', 'UsersController', ['only' => ['show', 'edit', 'update']]);
+    });
 
-// 前台用户更新
-Route::patch('foreUsers/{user}', 'UsersController@foreUsersUpdate')->name('users.foreUsersUpdate');
-Route::get('foreUsers/{user}/edit', 'UsersController@foreUsersEdit')->name('users.foreUsersEdit');
+    // 密码修改相关
+    Route::namespace('Fore\Passwords')->name('fore.passwords.')->group(function() {
+        Route::resource('passwords', 'PasswordsController', ['only' => ['edit', 'update']]);
+    });
 
-// 后台用户更新
-Route::patch('backUsers/{user}', 'UsersController@backUsersUpdate')->name('users.backUsersUpdate');
+    // 话题相关
+    Route::namespace('Fore\Topics')->name('fore.topics.')->group(function() {
+        Route::resource('topics', 'TopicsController', ['only' => ['create', 'index', 'show', 'update', 'edit', 'store', 'destroy']]);
+        Route::resource('topicCategories', 'TopicCategoriesController', ['only' => ['show']]);
 
-// 修改密码
-Route::resource('passwords', 'PasswordsController', ['only' => ['edit', 'update']]);
+        // 话题页面图片上传
+        Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
+    });
 
-// 话题页面
-Route::resource('topics', 'TopicsController', ['only' => ['create', 'index', 'show', 'update', 'edit', 'store', 'destroy']]);
+    // 房态相关
+    Route::namespace('Fore\Rooms')->name('fore.rooms.')->group(function() {
+        // 房态图
+        Route::resource('rooms', 'RoomsController', ['only' => ['index']]);
+    });
 
-// 话题分类
-Route::resource('topicCategories', 'TopicCategoriesController', ['only' => ['show']]);
+    // 租约详情
+    Route::namespace('Fore\Contracts')->name('fore.contracts.')->group(function() {
+        // 租约详情
+        Route::resource('leaseDetails', 'LeaseDetailsController', ['only' => ['show']]);
 
-// 话题页面图片上传
-Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
+        // 账单详情
+        Route::resource('accountDetails', 'AccountDetailsController', ['only' => ['show']]);
 
-// 房态图
-Route::resource('roomManagements', 'RoomManagementsController', ['only' => ['index']]);
+        // 合同详情
+        Route::resource('contractDetails', 'ContractDetailsController', ['only' => ['show']]);
 
-// 租约详情
-Route::resource('leaseDetails', 'LeaseDetailsController', ['only' => ['show']]);
+        // 居住人详情
+        Route::resource('residentDetails', 'ResidentDetailsController', ['only' => ['show']]);
 
-// 账单详情
-Route::resource('accountDetails', 'AccountDetailsController', ['only' => ['show']]);
+        // 水电费详情
+        Route::resource('utilityDetails', 'UtilityDetailsController', ['only' => ['show']]);
+    });
+});
 
-// 合同详情
-Route::resource('contractDetails', 'ContractDetailsController', ['only' => ['show']]);
-
-// 居住人详情
-Route::resource('residentDetails', 'ResidentDetailsController', ['only' => ['show']]);
-
-// 水电费详情
-Route::resource('utilityDetails', 'UtilityDetailsController', ['only' => ['show']]);
+// Route::get('/', 'TopicsController@index')->name('root');
 
 // test
 Route::get('test', function () {

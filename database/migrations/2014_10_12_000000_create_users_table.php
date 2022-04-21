@@ -17,9 +17,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name')->common('用户名');
             $table->string('email')->unique()->common('邮箱');
-            $table->string('avatar')->nullable()->common('头像');
+            $table->string('avatar')->default('http://qiniu.baojiagongyu.xyz/05241946722924.jpg')->common('头像');
             $table->string('password')->common('密码');
             $table->boolean('is_admin')->default(false)->common('是否是管理员');
+            $table->boolean('active')->default(true)->common('是否启用');
             $table->rememberToken()->common('记住我令牌');
             $table->timestamps();
             $table->softDeletes();
