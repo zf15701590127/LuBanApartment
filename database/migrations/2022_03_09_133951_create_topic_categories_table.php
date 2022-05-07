@@ -17,10 +17,31 @@ return new class extends Migration
         Schema::create('topic_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->index()->comment('名称');
-            $table->string('description')->default('')->comment('描述');
+            $table->string('description')->comment('描述');
             $table->timestamps();
             $table->softDeletes();
         });
+
+        $topicCategories = [
+            [
+                'name'        => '分享',
+                'description' => '分享创造，分享发现',
+            ],
+            [
+                'name'        => '教程',
+                'description' => '开发技巧、推荐扩展包等',
+            ],
+            [
+                'name'        => '问答',
+                'description' => '请保持友善，互帮互助',
+            ],
+            [
+                'name'        => '公告',
+                'description' => '站点公告',
+            ],
+        ];
+
+        DB::table('topic_categories')->insert($topicCategories);
     }
 
     /**

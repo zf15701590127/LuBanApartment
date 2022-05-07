@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class TopicCategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show(TopicCategory $topicCategory)
     {
         // 读取分类 ID 关联的话题，并按每 20 条分页

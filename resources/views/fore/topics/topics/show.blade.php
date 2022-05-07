@@ -25,7 +25,7 @@
     </div>
 
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 topic-content">
-      <div class="card ">
+      <div class="card">
         <div class="card-body">
           <h1 class="text-center mt-3 mb-3">
             {{ $topic->title }}
@@ -39,7 +39,7 @@
             {!! $topic->body !!}
           </div>
 
-          @can('update', $topic)
+          @can('foreUpdate', $topic)
             <div class="operate">
               <hr>
               <a href="{{ route('fore.topics.topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">

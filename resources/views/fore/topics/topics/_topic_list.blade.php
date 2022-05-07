@@ -9,7 +9,6 @@
         </div>
 
         <div class="flex-grow-1 ms-2">
-
           <div class="mt-0 mb-1">
             <a href="{{ route('fore.topics.topics.show', [$topic->id]) }}" title="{{ $topic->title }}">
               {{ $topic->title }}

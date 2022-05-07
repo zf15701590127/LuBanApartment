@@ -42,14 +42,16 @@
                   <i class="far fa-edit me-2 fa-fw"></i>
                   编辑资料
                 </a>
-                <a class="dropdown-item" href="{{ route('back.users.users.index') }}">
-                  <i class="fas fa-user-friends me-2 fa-fw"></i>
-                  用户列表
-                </a>
-                {{-- <a class="dropdown-item" href="{{ route('configs.project.index') }}">
-                  <i class="fa fa-cog fa-fw"></i>
-                  配置中心
-                </a> --}}
+                @can('is_admin', Auth::user())
+                  <a class="dropdown-item" href="{{ route('back.users.users.index') }}">
+                    <i class="fas fa-user-friends me-2 fa-fw"></i>
+                    用户列表
+                  </a>
+                  <a class="dropdown-item" href="{{ route('back.configs.projects.index') }}">
+                    <i class="fa fa-cog me-2 fa-fw"></i>
+                    配置中心
+                  </a>
+                @endcan
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" id="logout" href="#">
                   <form action="{{ route('fore.sessions.sessions.destroy') }}" method="POST" onsubmit="return confirm('您确定要退出吗？');">

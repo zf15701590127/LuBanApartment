@@ -16,4 +16,5 @@ class TopicCategory extends Model
         'name',
         'description',
     ];
+
 }

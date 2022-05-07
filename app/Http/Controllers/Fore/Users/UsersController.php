@@ -23,7 +23,7 @@ class UsersController extends Controller
     // 前台用户编辑
     public function edit(User $user)
     {
-        $this->authorize('update', $user);
+        $this->authorize('foreUpdate', $user);
 
         return view('fore.users.users.edit', compact('user'));
     }
@@ -31,7 +31,8 @@ class UsersController extends Controller
     // 前台用户更新
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
-        $this->authorize('update', $user);
+        $this->authorize('foreUpdate', $user);
+
         $data = $request->only(['email', 'avatar']);
 
         if ($request->avatar) {

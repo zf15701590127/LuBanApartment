@@ -26,7 +26,7 @@ class TopicRequest extends FormRequest
         return [
             'title' => 'required|min:2',
             'body' => 'required|min:3',
-            'topic_category_id' => 'required|numeric',
+            'topic_category_id' => 'required|numeric|exists:topic_categories,id',
         ];
     }
 

@@ -21,8 +21,27 @@ client: 代表客户端。
 
  // 后台路由
  Route::prefix('back')->group(function(){
+    // 用户管理
     Route::namespace('Back\Users')->name('back.users.')->group(function() {
         Route::resource('users', 'UsersController', ['only' => ['index', 'store', 'destroy', 'create', 'edit', 'update']]);
+    });
+
+    // 配置管理
+    Route::namespace('Back\Configs')->name('back.configs.')->group(function() {
+        // 项目配置
+        Route::resource('projects', 'ProjectsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 话题分类配置
+        Route::resource('topicCategories', 'TopicCategoriesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 楼栋管理
+        Route::resource('buildings', 'BuildingsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 房间用途管理
+        Route::resource('purposes', 'PurposesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 房源配置
+        Route::resource('rooms', 'RoomsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 门店定价
+        Route::resource('prices', 'PricesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 会计科目
+        Route::resource('accountingSubjects', 'AccountingSubjectsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
     });
  });
 

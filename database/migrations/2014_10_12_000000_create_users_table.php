@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -26,7 +27,13 @@ return new class extends Migration
             $table->softDeletes();
         });
 
+        $user = new User;
+        $user->name = 'William';
+        $user->email = '15701590127@163.com';
+        $user->is_admin = 1;
+        $user->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'; // password
 
+        $user->save();
     }
 
     /**

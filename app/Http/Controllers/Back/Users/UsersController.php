@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Back\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -17,12 +18,16 @@ class UsersController extends Controller
     // 后台编辑
     public function edit(User $user)
     {
+        $this->authorize('is_admin', Auth::user());
+
         return view('back.users.users.create_and_edit', compact('user'));
     }
 
     // 后台用户更新
     public function update(UserRequest $request, User $user)
     {
+        $this->authorize('is_admin', Auth::user());
+
         $data = [];
 
         $data['name'] = $request->name;
@@ -38,11 +43,15 @@ class UsersController extends Controller
 
     public function create(User $user)
     {
+        $this->authorize('is_admin', Auth::user());
+
         return view('back.users.users.create_and_edit', compact('user'));
     }
 
     public function store(UserRequest $request)
     {
+        $this->authorize('is_admin', Auth::user());
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -55,23 +64,25 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('is_admin', Auth::user());
+
         // 创建一个查询构造器
-        $userBuilder = User::query()->withTrashed();
+        $builder = User::query()->withTrashed();
 
         // 判断是否有提交 searchName 参数，如果有就赋值给 $searchName 变量
-        if ($search = $request->input('name', '')) {
+        if ($search = $request->input('search', '')) {
             $like = '%' .$search. '%';
             // 模糊搜索
-            $userBuilder->where('name', 'like', $like);
+            $builder->where('name', 'like', $like);
         }
 
-        $userQuantity = $userBuilder->count();
+        $quantity = $builder->count();
 
-        $users = $userBuilder->paginate(10);
+        $users = $builder->paginate(10);
 
         return view('back.users.users.index', [
             'users' => $users,
-            'userQuantity' => $userQuantity,
+            'quantity' => $quantity,
             'filters' => [
                 'search' => $search,
             ],
@@ -80,11 +91,11 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
+        $this->authorize('is_admin', Auth::user());
+
         $user->active = 0;
         $user->save();
 
-        session()->flash('success', '成功禁用用户！');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', '成功禁用用户！');
     }
 }

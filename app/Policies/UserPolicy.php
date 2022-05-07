@@ -9,13 +9,21 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function update(User $currentUser, User $user)
+    // 前台用户更新权限
+    public function foreUpdate(User $currentUser, User $user)
     {
         return $currentUser->id === $user->id;
     }
 
-    public function destroy(User $currentUser, User $user)
+    // 后台列表删除权限
+    public function backDestroy(User $currentUser, User $user)
     {
-        return $currentUser->is_admin && $currentUser->id !== $user->id;
+        return $user->is_admin == 0;
+    }
+
+    // 后台的操作权限
+    public function is_admin(User $currentUser, User $user)
+    {
+        return $currentUser->is_admin;
     }
 }

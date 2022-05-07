@@ -49,6 +49,7 @@
 
           <div class="well well-sm">
             <button type="submit" class="btn btn-primary"><i class="far fa-save mr-2" aria-hidden="true"></i> 保存</button>
+            <a class="btn btn-success" href="{{ url()->previous() }}"><i class="fa fa-reply mr-2" aria-hidden="true"></i> 返回</a>
           </div>
           </form>
         </div>

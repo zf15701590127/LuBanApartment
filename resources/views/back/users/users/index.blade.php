@@ -12,7 +12,7 @@
           </li>
           </li>
         </ul>
-        <div class="mt-3 mb-3 px-3 py-3 bg-light">用户数量：<span class="text-primary h5">{{ $userQuantity }}</span></div>
+        <div class="mt-3 mb-3 px-3 py-3 bg-light">用户数量：<span class="text-primary h5">{{ $quantity }}</span></div>
         <div class="table-responsive">
           <table class="table table-bordered align-middle">
             <thead>
@@ -32,8 +32,8 @@
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->active ? '启用' : '禁用' }}</td>
                 <td>
+                  @can('backDestroy', $user)
                   <a class="btn btn-outline-primary btn-sm" href="{{ route('back.users.users.edit', $user->id) }}">修改</a>
-                  @can('destroy', $user)
                     <form action="{{ route('back.users.users.destroy', $user->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('DELETE')
@@ -47,12 +47,12 @@
           </table>
         </div>
         <div class="mt-3">
-          {!! $users->render() !!}
+          {{ $users->appends($filters)->render() }}
         </div>
       </div>
     </div>
     <div class="col-2">
-      <div class="card mb-3">
+      <div class="card mb-3 border-0">
         <div class="card-body">
           <!-- Button trigger modal -->
           <a class="btn btn-primary w-100" href="{{ route('back.users.users.create') }}">
@@ -60,7 +60,7 @@
           </a>
         </div>
       </div>
-      <div class="card">
+      <div class="card border-0">
         <div class="card-body pt-2">
           <div class="text-center mt-1 mb-0 text-muted">
             筛选
@@ -68,8 +68,8 @@
           <hr class="mt-2 mb-3">
           <form action="{{ route('back.users.users.index') }}" method="GET" class="search-form">
             <div class="mb-3">
-              <label for="name" class="form-label">用户名</label>
-              <input name="name" type="text" class="form-control bg-white" id="name" placeholder="用户名">
+              <label for="search" class="form-label">用户名</label>
+              <input name="search" type="text" class="form-control bg-white" id="search" placeholder="用户名">
             </div>
             <div class="d-grid gap-2">
               <button class="btn btn-primary" type="submit">提交</button>
@@ -87,7 +87,7 @@
   <script>
     var filters = {!! json_encode($filters) !!};
     $(document).ready(function () {
-      $('.search-form input[name=name]').val(filters.search);
+      $('.search-form input[name=search]').val(filters.search);
     })
   </script>
 @endsection

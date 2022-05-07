@@ -32,6 +32,7 @@ class TopicsController extends Controller
     public function create(Topic $topic)
     {
         $topicCategories = TopicCategory::all();
+
         return view('fore.topics.topics.create_and_edit', compact('topic', 'topicCategories'));
     }
 
@@ -42,29 +43,31 @@ class TopicsController extends Controller
         $topic->order = 0;
         $topic->save();
 
-        return redirect()->route('fore.topics.topics.show', $topic->id)->with('success', '帖子创建成功！');
+        return redirect()->route('fore.topics.topics.show', $topic->id)->with('success', '创建成功！');
     }
 
     public function edit(Topic $topic)
     {
-        $this->authorize('update', $topic);
+        $this->authorize('foreUpdate', $topic);
         $topicCategories = TopicCategory::all();
+
         return view('fore.topics.topics.create_and_edit', compact('topic', 'topicCategories'));
     }
 
     public function update(TopicRequest $request, Topic $topic)
     {
-        $this->authorize('update', $topic);
+        $this->authorize('foreUpdate', $topic);
         $topic->update($request->all());
+
         return redirect()->route('fore.topics.topics.show', $topic->id)->with('success', '更新成功！');
     }
 
     public function destroy(Topic $topic)
     {
-        $this->authorize('destroy', $topic);
+        $this->authorize('foreUpdate', $topic);
         $topic->delete();
 
-        return redirect()->route('fore.topics.topics.index')->with('success', '成功删除！');
+        return redirect()->route('foretopics.index')->with('success', '成功删除！');
     }
 
     // 话题的富文本编辑器图片上传
