@@ -15,35 +15,31 @@
         <div class="mt-3 mb-3 px-3 py-3 bg-light">用户数量：<span class="text-primary h5">{{ $quantity }}</span></div>
         <div class="table-responsive">
           <table class="table table-bordered align-middle">
-            <thead>
-              <tr>
-                <th>用户名</th>
-                <th>邮箱</th>
-                <th>注册时间</th>
-                <th>用户状态</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($users as $user)
-              <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->active ? '启用' : '禁用' }}</td>
-                <td>
-                  @can('backDestroy', $user)
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('back.users.users.edit', $user->id) }}">修改</a>
-                    <form action="{{ route('back.users.users.destroy', $user->id) }}" method="post" class="d-inline">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-outline-danger btn-sm" type="button">禁用</button>
-                    </form>
-                  @endcan
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
+            <tr>
+              <th>用户名</th>
+              <th>邮箱</th>
+              <th>注册时间</th>
+              <th>用户状态</th>
+              <th>操作</th>
+            </tr>
+            @foreach ($users as $user)
+            <tr>
+              <td>{{ $user->name }}</td>
+              <td>{{ $user->email }}</td>
+              <td>{{ $user->created_at }}</td>
+              <td>{{ $user->active ? '启用' : '禁用' }}</td>
+              <td>
+                @can('backDestroy', $user)
+                <a class="btn btn-outline-primary btn-sm" href="{{ route('back.users.users.edit', $user->id) }}">修改</a>
+                  <form action="{{ route('back.users.users.destroy', $user->id) }}" method="post" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger btn-sm" type="button">禁用</button>
+                  </form>
+                @endcan
+              </td>
+            </tr>
+            @endforeach
           </table>
         </div>
         <div class="mt-3">

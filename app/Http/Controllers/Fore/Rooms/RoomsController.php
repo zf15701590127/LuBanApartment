@@ -20,5 +20,4 @@ class RoomsController extends Controller
         return view('fore.rooms.rooms.index', compact('rooms'));
     }
 
-
 }

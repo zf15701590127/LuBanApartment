@@ -18,7 +18,7 @@ class UsersController extends Controller
     // 后台编辑
     public function edit(User $user)
     {
-        $this->authorize('is_admin', Auth::user());
+        $this->authorize('backDestroy', $user);
 
         return view('back.users.users.create_and_edit', compact('user'));
     }
@@ -26,7 +26,7 @@ class UsersController extends Controller
     // 后台用户更新
     public function update(UserRequest $request, User $user)
     {
-        $this->authorize('is_admin', Auth::user());
+        $this->authorize('backDestroy', $user);
 
         $data = [];
 
@@ -91,7 +91,7 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        $this->authorize('is_admin', Auth::user());
+        $this->authorize('backDestroy', $user);
 
         $user->active = 0;
         $user->save();

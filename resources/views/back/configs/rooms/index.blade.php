@@ -17,39 +17,35 @@
         <div class="mt-3 mb-3 px-3 py-3 bg-light">房间数量：<span class="text-primary h5">{{ $quantity }}</span></div>
           <div class="table-responsive">
             <table class="table table-bordered align-middle">
-              <thead>
-                <tr>
-                  <th>所属项目</th>
-                  <th>所属楼栋</th>
-                  <th>房间名称</th>
-                  <th>楼层</th>
-                  <th>房间用途</th>
-                  <th>基础价格</th>
-                  <th>门店价格</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($rooms as $room)
-                <tr>
-                  <td>{{ $room->project->name }}</td>
-                  <td>{{ $room->building->name }}</td>
-                  <td>{{ $room->name }}</td>
-                  <td>{{ $room->floor }}</td>
-                  <td>{{ $room->purpose->name }}</td>
-                  <td>{{ $room->benchmark_price }}</td>
-                  <td>{{ $room->store_price }}</td>
-                  <td>
-                    <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.rooms.edit', $room->id) }}">修改</a>
-                      <form action="{{ route('back.configs.rooms.destroy', $room->id) }}" method="post" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
-                      </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
+              <tr>
+                <th>所属项目</th>
+                <th>所属楼栋</th>
+                <th>房间名称</th>
+                <th>楼层</th>
+                <th>房间用途</th>
+                <th>基础价格</th>
+                <th>门店价格</th>
+                <th>操作</th>
+              </tr>
+              @foreach ($rooms as $room)
+              <tr>
+                <td>{{ $room->project->name }}</td>
+                <td>{{ $room->building->name }}</td>
+                <td>{{ $room->name }}</td>
+                <td>{{ $room->floor }}</td>
+                <td>{{ $room->purpose->name }}</td>
+                <td>{{ $room->benchmark_price }}</td>
+                <td>{{ $room->store_price }}</td>
+                <td>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.rooms.edit', $room->id) }}">修改</a>
+                    <form action="{{ route('back.configs.rooms.destroy', $room->id) }}" method="post" class="d-inline">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
+                    </form>
+                </td>
+              </tr>
+              @endforeach
             </table>
           </div>
         <div class="mt-3">

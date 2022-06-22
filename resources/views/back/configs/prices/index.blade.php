@@ -17,35 +17,31 @@
         <div class="mt-3 mb-3 px-3 py-3 bg-light">门店定价数量：<span class="text-primary h5">{{ $quantity }}</span></div>
           <div class="table-responsive">
             <table class="table table-bordered align-middle">
-              <thead>
-                <tr>
-                  <th>所属项目</th>
-                  <th>定金</th>
-                  <th>冷水费</th>
-                  <th>电费</th>
-                  <th>换房费</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($prices as $price)
-                <tr>
-                  <td>{{ $price->project->name }}</td>
-                  <td>{{ $price->deposit }}</td>
-                  <td>{{ $price->cold_water_fee }}</td>
-                  <td>{{ $price->electricity_fee }}</td>
-                  <td>{{ $price->change_room_fee }}</td>
-                  <td>
-                    <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.prices.edit', $price->id) }}">修改</a>
-                      <form action="{{ route('back.configs.prices.destroy', $price->id) }}" method="post" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
-                      </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
+              <tr>
+                <th>所属项目</th>
+                <th>定金</th>
+                <th>冷水费</th>
+                <th>电费</th>
+                <th>换房费</th>
+                <th>操作</th>
+              </tr>
+              @foreach ($prices as $price)
+              <tr>
+                <td>{{ $price->project->name }}</td>
+                <td>{{ $price->deposit }}</td>
+                <td>{{ $price->cold_water_fee }}</td>
+                <td>{{ $price->electricity_fee }}</td>
+                <td>{{ $price->change_room_fee }}</td>
+                <td>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.prices.edit', $price->id) }}">修改</a>
+                    <form action="{{ route('back.configs.prices.destroy', $price->id) }}" method="post" class="d-inline">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
+                    </form>
+                </td>
+              </tr>
+              @endforeach
             </table>
           </div>
         <div class="mt-3">

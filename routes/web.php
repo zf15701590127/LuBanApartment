@@ -42,6 +42,22 @@ client: 代表客户端。
         Route::resource('prices', 'PricesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
         // 会计科目
         Route::resource('accountingSubjects', 'AccountingSubjectsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 租赁类型
+        Route::resource('leaseTypes', 'leaseTypesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 签约类型
+        Route::resource('signContractTypes', 'SignContractTypesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 合同类型
+        Route::resource('contractTypes', 'ContractTypesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 证件类型配置
+        Route::resource('certificateTypes', 'CertificateTypesController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 押金月数配置
+        Route::resource('depositMonths', 'DepositMonthsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 租赁周期配置
+        Route::resource('leaseTerms', 'leaseTermsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 销售渠道配置
+        Route::resource('marketingChannels', 'MarketingChannelsController', ['only' => ['index', 'store', 'create', 'edit', 'update', 'destroy']]);
+        // 支付方式配置
+        Route::resource('paymentTypes', 'PaymentTypesController', ['only' => ['index', 'store', 'store', 'create', 'edit', 'update', 'destroy']]);
     });
  });
 
@@ -82,21 +98,30 @@ client: 代表客户端。
     // 租约详情
     Route::namespace('Fore\Contracts')->name('fore.contracts.')->group(function() {
         // 租约详情
-        Route::resource('leaseDetails', 'LeaseDetailsController', ['only' => ['show']]);
+        Route::resource('leases', 'LeasesController', ['only' => ['show']]);
 
         // 账单详情
-        Route::resource('accountDetails', 'AccountDetailsController', ['only' => ['show']]);
+        Route::resource('orders', 'OrdersController', ['only' => ['show']]);
 
         // 合同详情
-        Route::resource('contractDetails', 'ContractDetailsController', ['only' => ['show']]);
+        Route::resource('contracts', 'ContractsController', ['only' => ['show', 'create', 'store']]);
 
         // 居住人详情
-        Route::resource('residentDetails', 'ResidentDetailsController', ['only' => ['show']]);
+        Route::resource('contractCustomers', 'ContractCustomersController', ['only' => ['show', 'create', 'store', 'edit', 'update', 'destroy']]);
 
         // 水电费详情
-        Route::resource('utilityDetails', 'UtilityDetailsController', ['only' => ['show']]);
+        Route::resource('utilities', 'UtilitiesController', ['only' => ['show']]);
+    });
+
+    // PC 端支付（关键端操作后台支付）
+    Route::namespace('Fore\Payments')->name('fore.payments.')->group(function() {
+        // 支付
+        Route::post('payments/{order}', 'PaymentsController@payment')->name('payments.payment');
     });
 });
+
+
+
 
 // Route::get('/', 'TopicsController@index')->name('root');
 

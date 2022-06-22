@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\back\configs;
+namespace App\Http\Controllers\Back\Configs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Back\PurposeRequest;

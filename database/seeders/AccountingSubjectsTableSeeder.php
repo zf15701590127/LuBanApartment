@@ -16,9 +16,9 @@ class AccountingSubjectsTableSeeder extends Seeder
     public function run()
     {
         DB::table('accounting_subjects')->insert([
-            ['name' => '定金'],
-            ['name' => '合同租金'],
             ['name' => '押金'],
+            ['name' => '合同租金'],
+            ['name' => '定金'],
             ['name' => '冷水费'],
             ['name' => '热水费'],
             ['name' => '电费'],

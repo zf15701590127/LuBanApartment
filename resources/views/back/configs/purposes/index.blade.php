@@ -17,27 +17,23 @@
         <div class="mt-3 mb-3 px-3 py-3 bg-light">房间用途数量：<span class="text-primary h5">{{ $quantity }}</span></div>
           <div class="table-responsive">
             <table class="table table-bordered align-middle">
-              <thead>
-                <tr>
-                  <th>房间用途名称</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($purposes as $purpose)
-                <tr>
-                  <td>{{ $purpose->name }}</td>
-                  <td>
-                    <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.purposes.edit', $purpose->id) }}">修改</a>
-                      <form action="{{ route('back.configs.purposes.destroy', $purpose->id) }}" method="post" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
-                      </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
+              <tr>
+                <th>房间用途名称</th>
+                <th>操作</th>
+              </tr>
+              @foreach ($purposes as $purpose)
+              <tr>
+                <td>{{ $purpose->name }}</td>
+                <td>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.purposes.edit', $purpose->id) }}">修改</a>
+                    <form action="{{ route('back.configs.purposes.destroy', $purpose->id) }}" method="post" class="d-inline">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
+                    </form>
+                </td>
+              </tr>
+              @endforeach
             </table>
           </div>
         <div class="mt-3">
