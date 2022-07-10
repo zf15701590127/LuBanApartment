@@ -49,4 +49,14 @@ class Contract extends Model
     {
         return $this->belongsTo(room::class);
     }
+
+    public function leaseTerm()
+    {
+        return $this->belongsTo(LeaseTerm::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

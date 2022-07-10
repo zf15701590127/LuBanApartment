@@ -13,9 +13,9 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item"><a class="nav-link {{ active_class(if_route('fore.topics.topics.index')) }}" href="{{ route('fore.topics.topics.index') }}">话题中心</a></li>
           <li class="nav-item"><a class="nav-link {{ active_class(if_route('fore.rooms.rooms.index')) }}"  href="{{ route('fore.rooms.rooms.index') }}">房态中心</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('fore.topics.topics.index') }}">运营管理</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('fore.topics.topics.index') }}">财务管理</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('fore.topics.topics.index') }}">报表管理</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('fore.reserves.reserves.index') }}">运营管理</a></li>
+          <li class="nav-item"><a class="nav-link" href="">财务管理</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('fore.reports.payments.index') }}">报表管理</a></li>
         </ul>
 
         <!-- Right Side Of Navbar -->

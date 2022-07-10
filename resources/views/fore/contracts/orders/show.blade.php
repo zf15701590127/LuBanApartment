@@ -29,19 +29,19 @@
             <td>{{ date('Y-m-d', $order->end_date) }}</td>
             <td>{{ $order->including_tax_price }}</td>
             <td>{{ $order->paid_amount }}</td>
-            <td>{{ date('Y-m-d', $order->begin_date) }}</td>
+            <td>{{ date('Y-m-d', $order->due_date) }}</td>
             @switch ($order->pay_status)
               @case(1)
-                <td>未支付</td>
+                <td style="color:#e87749;">已支付</td>
                 @break;
               @case(2)
-                <td>未支付</td>
+                <td style="color:#e87749;">未支付</td>
                 @break;
               @case(3)
-                <td>部分支付</td>
+                <td style="color:#e87749;">部分支付</td>
                 @break;
             @endswitch
-            <td><a href="javascript:void(0);" class="payment-link" data-bs-toggle="modal" data-bs-target="#payment" data-id="{{ $order->id }}">支付</a></td>
+            <td><a href="javascript:void(0);" class="payment-link" data-bs-toggle="modal" data-bs-target="#payment" data-id="{{ $order->id }}" data-unpaid-amount="{{ $order->unpaid_amount }}">支付</a></td>
           </tr>
         @endforeach
     </table>
@@ -89,9 +89,10 @@
 <script>
   $(document).ready(function() {
     $('.payment-link').click(function () {
-      console.log(1);
       var id = $(this).data('id');
-      $('.payment-form').attr('action', '{{ url("fore/payments/") }}/'+id);
+      var unpaid_amount = $(this).data('unpaid-amount');
+      $('.payment-form').attr('action', '{{ url("fore/payments/") }}/'+id+'/order');
+      $('.payment-form input[name=amount]').val(unpaid_amount);
     })
   })
 </script>

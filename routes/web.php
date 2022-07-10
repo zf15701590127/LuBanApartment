@@ -93,6 +93,14 @@ client: 代表客户端。
     Route::namespace('Fore\Rooms')->name('fore.rooms.')->group(function() {
         // 房态图
         Route::resource('rooms', 'RoomsController', ['only' => ['index']]);
+        // 修改房间状态为脏房
+        Route::post('rooms/{room}/dirtyStatusMark', 'RoomsController@dirtyStatusMark')->name('rooms.dirtyStatusMark');
+        // 修改房间状态为维修房
+        Route::post('rooms/{room}/repair', 'RoomsController@repairStatusMark')->name('rooms.repairStatusMark');
+        // 修改脏房为可出租状态（0）
+        Route::post('rooms/{room}/clean', 'RoomsController@cleanStatusMark')->name('rooms.cleanStatusMark');
+        // 修改维修房为可出租状态（0）
+        Route::post('rooms/{room}/repaired', 'RoomsController@repairedStatusMark')->name('rooms.repairedStatusMark');
     });
 
     // 租约详情
@@ -104,7 +112,9 @@ client: 代表客户端。
         Route::resource('orders', 'OrdersController', ['only' => ['show']]);
 
         // 合同详情
-        Route::resource('contracts', 'ContractsController', ['only' => ['show', 'create', 'store']]);
+        Route::resource('contracts', 'ContractsController', ['only' => ['show', 'create', 'store', 'index']]);
+        // 预定转签约
+        Route::post('contracts/reserveTransformContract', 'ContractsController@reserveTransFormContract')->name('contracts.reserveTransFormContract');
 
         // 居住人详情
         Route::resource('contractCustomers', 'ContractCustomersController', ['only' => ['show', 'create', 'store', 'edit', 'update', 'destroy']]);
@@ -113,10 +123,32 @@ client: 代表客户端。
         Route::resource('utilities', 'UtilitiesController', ['only' => ['show']]);
     });
 
-    // PC 端支付（关键端操作后台支付）
+    // 预定
+    Route::namespace('Fore\Reserves')->name('fore.reserves.')->group(function() {
+        // 预定
+        Route::resource('reserves', 'ReservesController', ['only' => ['create', 'store', 'index']]);
+
+        // 预定取消
+        Route::post('reserves/{reserve}/cancel', 'ReservesController@cancel')->name('reserves.cancel');
+
+    });
+
+    // PC 端支付（管家端操作支付）
     Route::namespace('Fore\Payments')->name('fore.payments.')->group(function() {
-        // 支付
-        Route::post('payments/{order}', 'PaymentsController@payment')->name('payments.payment');
+        // 订单支付
+        Route::post('payments/{order}/order', 'PaymentsController@order')->name('payments.order');
+
+        // 预定支付
+        Route::post('payments/{reserve}/reserve', 'PaymentsController@reserve')->name('payments.reserve');
+    });
+
+    // 报表
+    Route::namespace('Fore\Reports')->name('fore.reports.')->group(function() {
+        // 交易流水报表
+        Route::resource('bills', 'BillsController', ['only' => ['index']]);
+
+        // 流水明细报表
+        Route::resource('payments', 'PaymentsController', ['only' => ['index']]);
     });
 });
 

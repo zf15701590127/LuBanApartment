@@ -15,10 +15,15 @@ class Room extends Model
         'name',
         'floor',
         'purpose_id',
+        'status_mark',
+        'reservation_id',
+        'contract_id',
         'benchmark_price',
         'store_price',
         'order',
-        'project_id'
+        'project_id',
+        'area',
+        'move_out_date'
     ];
 
     public function building()
@@ -34,5 +39,15 @@ class Room extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function contract()
+    {
+        return $this->hasOne(Contract::class);
+    }
+
+    public function reserve()
+    {
+        return $this->hasOne(Reserve::class);
     }
 }

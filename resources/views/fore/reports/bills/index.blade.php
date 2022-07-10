@@ -4,39 +4,41 @@
 
 <div class="col-md-12">
   <div class="row px-3">
-    @include('back.configs._list')
-    <div class="col-8">
+    <div class="col-10">
       <div class="px-3 py-3 bg-white rounded-3">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">项目配置</a>
-          </li>
-        </ul>
-        @if (count($projects))
-        <div class="mt-3 mb-3 px-3 py-3 bg-light">项目数量：<span class="text-primary h5">{{ $quantity }}</span></div>
+        @include('fore.reports._navbar')
+        @if (count($bills))
+        <div class="mt-3 mb-3 px-3 py-3 bg-light">数量：<span class="text-primary h5">{{ $quantity }}</span></div>
           <div class="table-responsive">
             <table class="table table-bordered align-middle">
               <tr>
                 <th>项目名称</th>
-                <th>操作</th>
+                <th>房间号</th>
+                <th>签约人姓名</th>
+                <th>账单类型</th>
+                <th>金额</th>
+                <th>支付方式</th>
+                <th>账单开始时间</th>
+                <th>账单结束时间</th>
+                <th>缴费时间</th>
               </tr>
-              @foreach ($projects as $project)
+              @foreach ($bills as $bill)
               <tr>
-                <td>{{ $project->name }}</td>
-                <td>
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('back.configs.projects.edit', $project->id) }}">修改</a>
-                    <form action="{{ route('back.configs.projects.destroy', $project->id) }}" method="post" class="d-inline">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-outline-danger btn-sm" type="button">删除</button>
-                    </form>
-                </td>
+                <td>{{ $bill->project->name }}</td>
+                <td>{{ $bill->room->name }}</td>
+                <td>{{ $bill->roomCustomer->name }}</td>
+                <td>{{ $bill->accountingSubject->name }}</td>
+                <td>{{ $bill->amount }}</td>
+                <td>{{ $bill->paymentType->name }}</td>
+                <td>{{ date('Y-m-d', $bill->begin_date) }}</td>
+                <td>{{ date('Y-m-d', $bill->end_date) }}</td>
+                <td>{{ $bill->created_at }}</td>
               </tr>
               @endforeach
             </table>
           </div>
         <div class="mt-3">
-          {{ $projects->appends($filters)->render() }}
+          {{ $bills->appends($filters)->render() }}
         </div>
         @else
         <div class="empty-block">暂无数据 ~_~ </div>
@@ -44,14 +46,6 @@
       </div>
     </div>
     <div class="col-2">
-      <div class="card mb-3 border-0">
-        <div class="card-body">
-          <!-- Button trigger modal -->
-          <a class="btn btn-primary w-100" href="{{ route('back.configs.projects.create') }}">
-            新增项目
-          </a>
-        </div>
-      </div>
       <div class="card border-0">
         <div class="card-body pt-2">
           <div class="text-center mt-1 mb-0 text-muted">

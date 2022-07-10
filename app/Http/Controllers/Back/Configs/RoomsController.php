@@ -63,7 +63,14 @@ class RoomsController extends Controller
     {
         $this->authorize('is_admin', Auth::user());
 
-        Room::create($request->all());
+        $room = $request->all();
+        $room['status_mark'] = 0;
+        $room['reservation_id'] = 0;
+        $room['contract_id'] = 0;
+        $room['area'] = 20;
+        $room['move_out_date'] = 0;
+
+        Room::create($room);
 
         return redirect()->route('back.configs.rooms.index')->with('success', '添加成功!');
     }

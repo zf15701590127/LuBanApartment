@@ -35,6 +35,9 @@ return new class extends Migration
             $table->decimal('cold_water_read', 11, 2)->unsigned()->comment('冷水读书');
             $table->decimal('electric_read', 11, 2)->unsigned()->comment('电表度数');
             $table->integer('period_type')->unsigned()->comment('周期类型 1:跨月，2:自然月');
+            $table->integer('recent_due_date')->unsigned()->comment('最近应缴费日期');
+            $table->integer('reserve_id')->unsigned()->comment('关联的预定 ID');
+            $table->string('remark')->comment('合同备注');
             $table->timestamps();
             $table->softDeletes();
         });

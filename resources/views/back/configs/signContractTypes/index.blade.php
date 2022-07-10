@@ -11,7 +11,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">签约类型配置</a>
           </li>
-          </li>
         </ul>
         @if (count($signContractTypes))
         <div class="mt-3 mb-3 px-3 py-3 bg-light">签约类型数量：<span class="text-primary h5">{{ $quantity }}</span></div>

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('name')->comment('房间名称');
             $table->integer('floor')->comment('楼层');
             $table->integer('purpose_id')->unsigned()->comment('关联房间用途 ID');
+            $table->integer('status_mark')->unsigned()->comment('状态标志 0:空房；1:维修；2:脏房；3:已预定;4:已出租');
+            $table->integer('reserve_id')->unsigned()->comment('关联预定主键 ID');
+            $table->integer('contract_id')->unsigned()->comment('关联合同主键 ID');
             $table->decimal('benchmark_price', 11, 2)->comment('基准价格');
             $table->decimal('store_price', 11, 2)->comment('门店价格');
             $table->integer('area')->unsigned()->comment('房间面积');

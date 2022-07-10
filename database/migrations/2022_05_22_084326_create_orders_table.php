@@ -24,9 +24,10 @@ return new class extends Migration
             $table->decimal('tax_amount', 11, 2)->unsigned()->comment('税金');
             $table->decimal('tax_rate', 11, 2)->unsigned()->comment('税率');
             $table->decimal('excluding_tax_price', 11, 2)->unsigned()->comment('不含税金额');
+            $table->integer('due_date')->unsigned()->comment('应缴费日期');
             $table->integer('begin_date')->unsigned()->comment('开始时间');
             $table->integer('end_date')->unsigned()->comment('结束日期');
-            $table->integer('pay_status')->unsigned()->comment('支付状态,已支付1,未支付2，部分支付3');
+            $table->integer('pay_status')->unsigned()->comment('支付状态,已支付1,未支付2，部分支付3，退房作废4');
             $table->integer('payment_id')->unsigned()->comemtn('收款 ID');
             $table->integer('is_visible')->unsigned()->comment('客户是否可见,1可见，2不可见');
             $table->integer('project_id')->unsigned()->comment('所属项目 ID');
